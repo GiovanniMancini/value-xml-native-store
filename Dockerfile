@@ -5,10 +5,11 @@ ARG XSLT_PROC=https://github.com/Saxonica/Saxon-HE/raw/main/11/Java/SaxonHE11-5J
 
 FROM $JDK_IMAGE  AS builder
 ARG BASEX_VER
+ARG XSLT_PROC
 RUN echo 'using Basex: ' "$BASEX_VER"
-RUN apt-get update && apt-get install -y  unzip wget && \
+RUN apt-get update && apt-get install -y unzip wget && \
     cd /srv && wget "$BASEX_VER" && unzip *.zip && rm *.zip && \
-    mkdir saxon && cd saxon && \
+    mkdir xslt && cd xslt && \
     wget "$XSLT_PROC" && \
     unzip *.zip && rm *.zip
 COPY basex/web.xml /srv/basex/webapp/WEB-INF
@@ -19,14 +20,13 @@ ARG JDK_IMAGE
 ARG BASEX_VER
 
 COPY --from=builder /srv/basex/ /srv/basex
-COPY --from=builder /srv/saxon/saxon-he-11.5.jar /srv/basex/lib/custom
-COPY --from=builder /srv/saxon/lib/* /srv/basex/lib/custom
+COPY --from=builder /srv/xslt/*.jar /srv/basex/lib/custom
+COPY --from=builder /srv/xslt/lib/* /srv/basex/lib/custom
 
 RUN addgroup --gid 1000 basex 
 RUN adduser --home /srv/basex/ --uid 1000 --gid 1000 basex 
 RUN chown -R basex:basex /srv/basex
 
-# Switch to 'basex'
 USER basex
 
 ENV PATH=$PATH:/srv/basex/bin
@@ -44,7 +44,7 @@ WORKDIR /srv
 # Run BaseX HTTP server by default
 CMD ["/srv/basex/bin/basexhttp"]
 
-# LABEL org.opencontainers.image.source="https://github.com/Quodatum/basex-docker"
+LABEL org.opencontainers.image.source="https://github.com/GiovanniMancini/value-xml-native-store"
 LABEL org.opencontainers.image.vendor="Fundify It"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 LABEL it.fundify.basex-docker.basex="${BASEX_VER}"
