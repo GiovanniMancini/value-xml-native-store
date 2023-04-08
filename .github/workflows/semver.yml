@@ -15,6 +15,11 @@ jobs:
       uses: gittools/actions/gitversion/setup@v0
       with:
         versionSpec: '5.x'
+    - name: Determine Version
+      uses: gittools/actions/gitversion/execute@v0
+    - name: Display GitVersion variables (without prefix)
+      run: |
+        echo "SemVer: ${{ env.semVer }}"
     - name: Git Semantic Version
       uses: PaulHatch/semantic-version@v5.0.3
       with:
