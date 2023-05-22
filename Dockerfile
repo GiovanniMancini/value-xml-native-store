@@ -6,11 +6,11 @@ ARG XSLT_PROC=https://github.com/Saxonica/Saxon-HE/raw/main/11/Java/SaxonHE11-5J
 FROM $JDK_IMAGE  AS builder
 ARG BASEX_VER
 RUN echo 'using Basex: ' "$BASEX_VER"
-RUN apt-get update && apt-get install -y  unzip wget && \
-    cd /srv && wget "$BASEX_VER" && unzip *.zip && rm *.zip && \
-    mkdir saxon && cd saxon && \
-    wget "$XSLT_PROC" && \
-    unzip *.zip && rm *.zip
+RUN apt-get update && apt-get install -y unzip wget
+RUN cd /srv && wget "$BASEX_VER" && unzip *.zip && rm *.zip
+RUN mkdir saxon && cd saxon
+RUN wget "$XSLT_PROC"
+RUN unzip *.zip && rm *.zip
 COPY basex/web.xml /srv/basex/webapp/WEB-INF
 
 # Main image
