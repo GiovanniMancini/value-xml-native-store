@@ -1,10 +1,11 @@
 # Build BaseX docker image with customisation from folder basex
 ARG JDK_IMAGE=eclipse-temurin:17-jre
-ARG BASEX_VER='https://files.basex.org/releases/10.4/BaseX104.zip'
-ARG XSLT_PROC='https://github.com/Saxonica/Saxon-HE/raw/main/11/Java/SaxonHE11-5J.zip'
+ARG BASEX_VER=https://files.basex.org/releases/10.4/BaseX104.zip
+ARG XSLT_PROC=https://github.com/Saxonica/Saxon-HE/raw/main/11/Java/SaxonHE11-5J.zip
 
 FROM $JDK_IMAGE  AS builder
 ARG BASEX_VER
+ARG XSLT_PROC
 RUN echo 'using Basex: ' "$BASEX_VER"
 RUN apt-get update && apt-get install -y unzip wget
 RUN cd /srv && wget "$BASEX_VER" && unzip *.zip && rm *.zip
