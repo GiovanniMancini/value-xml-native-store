@@ -12,6 +12,7 @@ RUN cd /srv && wget "$BASEX_VER" && unzip *.zip && rm *.zip
 RUN mkdir saxon && cd saxon
 RUN wget "$XSLT_PROC"
 RUN unzip *.zip && rm *.zip
+RUN pwd
 COPY basex/web.xml /srv/basex/webapp/WEB-INF
 
 # Main image
