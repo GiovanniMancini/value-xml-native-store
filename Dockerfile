@@ -13,12 +13,15 @@ RUN wget "$BASEX_VER" && unzip *.zip && rm *.zip
 RUN mkdir saxon && cd saxon
 RUN wget "$XSLT_PROC"
 RUN unzip *.zip && rm *.zip
+RUN pwd
 COPY basex/web.xml /srv/basex/webapp/WEB-INF
 
 # Main image
 FROM $JDK_IMAGE
 ARG JDK_IMAGE
 ARG BASEX_VER
+
+RUN pwd
 
 COPY --from=builder /srv/basex/ /srv/basex
 COPY --from=builder /srv/saxon/saxon-he-11.5.jar /srv/basex/lib/custom
