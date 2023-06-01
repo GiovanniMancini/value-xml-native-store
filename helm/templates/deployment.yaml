@@ -28,11 +28,18 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
+      volumes:
+        - name: basex-data-storage
+          persistentVolumeClaim:
+          claimName: basex-data-claim
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: "/srv/basex/data"
+              name: basex-data-storage
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
