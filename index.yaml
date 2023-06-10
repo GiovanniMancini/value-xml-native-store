@@ -11,4 +11,14 @@ entries:
     urls:
     - https://github.com/GiovanniMancini/value-xml-native-store/releases/download/mybasex-0.0.2/mybasex-0.0.2.tgz
     version: 0.0.2
-generated: "2023-06-10T08:14:32.635652045Z"
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-10T09:55:38.202361581Z"
+    description: BaseX Helm Chart
+    digest: d92bb23f388830ea77ab31deb000e63e65d5ad57b5f363a4612c8397100891ca
+    name: mybasex
+    type: application
+    urls:
+    - https://github.com/GiovanniMancini/value-xml-native-store/releases/download/mybasex-0.0.1/mybasex-0.0.1.tgz
+    version: 0.0.1
+generated: "2023-06-10T09:55:38.202378481Z"
