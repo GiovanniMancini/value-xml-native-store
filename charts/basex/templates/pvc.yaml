@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWrite
+    - ReadWriteMany
   volumeMode: Block
   resources:
     requests:
