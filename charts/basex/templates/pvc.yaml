@@ -3,10 +3,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: basex-data-claim
 spec:
-  storageClassName: manual
+  storageClassName: local-storage
   accessModes:
     - ReadWriteMany
-  volumeMode: Block
+  volumeMode: Filesystem
   resources:
     requests:
       storage: 10Gi
