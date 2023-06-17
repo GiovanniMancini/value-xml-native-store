@@ -1,6 +1,6 @@
 # Build BaseX docker image with customisation from folder basex
 ARG JDK_IMAGE=eclipse-temurin:17-jre
-ARG BASEX_VER=https://files.basex.org/releases/10.4/BaseX104.zip
+ARG BASEX_VER=https://files.basex.org/releases/10.6/BaseX106.zip
 ARG XSLT_PROC=https://github.com/Saxonica/Saxon-HE/raw/main/11/Java/SaxonHE11-5J.zip
 
 FROM $JDK_IMAGE  AS builder
@@ -47,7 +47,6 @@ WORKDIR /srv
 # Run BaseX HTTP server by default
 CMD ["/srv/basex/bin/basexhttp"]
 
-# LABEL org.opencontainers.image.source="https://github.com/Quodatum/basex-docker"
 LABEL org.opencontainers.image.vendor="Fundify It"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 LABEL it.fundify.basex-docker.basex="${BASEX_VER}"
